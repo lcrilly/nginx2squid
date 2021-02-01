@@ -10,7 +10,7 @@ This PoC demonstrates NGINX operating as a reverse proxy, where the backend is a
 The NGINX configuration uses the http module to present a virtual server to the Client, and the stream module to establish the forward proxy tunnel.
 
 ```
-Client --> [nginx_http --(unix socket)--> nginx_stream+njs] ---> Squid --->[Backend]
+Client ==> [nginx_http --(unix socket)--> nginx_stream+njs] ==> Squid ==>[Backend]
 ```
 
 NGINX is listening on proxy.example.com
@@ -37,8 +37,8 @@ Demo
 ```shell
 $ docker-compose up
 ```
-1. Starts Squid proxy (localhost:3128)
-2. Starts NGINX Plus (localhost:443)
+1. Starts Squid (localhost:3128)
+2. Starts NGINX (localhost:443)
 
 ```shell
 $ curl -ik -H "X-Forward-To: nginx.org" https://localhost/2009.html
