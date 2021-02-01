@@ -1,0 +1,34 @@
+version: '3'
+
+networks:
+  frontend:
+
+services:
+  nginx_plus:
+    image: nginx
+    networks:
+      - frontend
+    ports:
+      - "443:443"
+    volumes:
+      - .:/home/root
+      - ./conf.d:/etc/nginx/conf.d
+      - ./stream_conf.d:/etc/nginx/stream_conf.d
+    command:
+      - "nginx"
+      - "-c"
+      - "/home/root/nginx.conf"
+      - "-g"
+      - "daemon off;"
+    depends_on:
+      - squid
+
+  squid:
+    image: datadog/squid
+    networks:
+      - frontend
+    ports:
+      - 3128:3128
+    volumes:
+      - ./squid_conf:/etc/squid
+      - ./squidcache:/var/spool/squid
