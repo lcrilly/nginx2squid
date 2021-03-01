@@ -24,12 +24,10 @@ function connect(s) {
 
         // Check the forward proxy has opened the tunnel
         s.on('download', function(data, flags) {
-            var res = data.split(' ')[1];
-            s.log("RECEIVED " + res + " response from proxy");
-            if (res == '200') {
+            if (data == 'HTTP/1.1 200 Connection established\r\n\r\n') {
                 s.warn("TUNNEL open");
             } else {
-                s.log("RECEIVED " + data);
+                s.log("TUNNEL FAIL " + data.substring(0, 12) + " (base64 bytes): " + data.toBytes().toString('base64'));
                 s.decline();
             }
             s.off('download');
