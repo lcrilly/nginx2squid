@@ -24,7 +24,7 @@ services:
       - squid
 
   squid:
-    image: datadog/squid
+    image: ubuntu/squid
     networks:
       - frontend
     ports:
