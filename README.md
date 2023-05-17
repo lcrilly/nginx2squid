@@ -35,14 +35,14 @@ Demo
 ----
 
 ```shell
-$ docker-compose up
+docker-compose up
 ```
 1. Starts Squid (localhost:3128)
 2. Starts NGINX (localhost:443)
 
 ```shell
-$ curl -ik -H "X-Forward-To: nginx.org" https://localhost/2009.html
-$ curl -ik -H "X-Forward-To: www.nginx.com" https://localhost/company/
+curl -ik -H "X-Forward-To: nginx.org" https://localhost/2009.html
+curl -ik -H "X-Forward-To: www.nginx.com" https://localhost/about/
 ```
 
 Limitations
